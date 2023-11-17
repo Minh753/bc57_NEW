@@ -14,7 +14,7 @@ export default class StyleComponent extends Component {
         }
         return (
             <div className='container'>
-                <p className={`bg-danger ${style['text-green']}`}>Lorem ipsum dolor sit amet.</p>
+                <p className={`bg-danger ${style[classNameCss]}`}>Lorem ipsum dolor sit amet.</p>
 
                 <div style={{
                     fontSide: '20px',
