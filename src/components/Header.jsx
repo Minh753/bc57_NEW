@@ -19,6 +19,9 @@ export default class Header extends Component {
                         <li className="nav-item">
                             <NavLink className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} to="/react-form" aria-current="page" style={({ isActive }) => isActive ? { border: '1px solid orange' } : {}}>React-form <span className="visually-hidden">(current)</span></NavLink>
                         </li>
+                        <li className="nav-item">
+                            <NavLink className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} to="/react-life-cycle" aria-current="page" style={({ isActive }) => isActive ? { border: '1px solid orange' } : {}}>React LifeCycle <span className="visually-hidden">(current)</span></NavLink>
+                        </li>
                         <li className="nav-item dropdown">
                             <NavLink className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Option</NavLink>
                             <div className="dropdown-menu" aria-labelledby="dropdownId">

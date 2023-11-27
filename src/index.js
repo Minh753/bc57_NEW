@@ -17,6 +17,7 @@ import Register from './Pages/Register';
 import Page404 from './Pages/Page404';
 import Admin from './Pages/Admin';
 import ReactForm from './Pages/ReactFrom/ReactForm';
+import ReactLifeCycle from './Pages/ReactLifeCycle/ReactLifeCycle';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 //JSX
 root.render(
@@ -30,6 +31,7 @@ root.render(
         <Route path='bt-change-color' element={<ChangeColor />}></Route>
         <Route path='xem-chi-tiet' element={<BaiTapXemChiTiet />}></Route>
         <Route path='react-form' element={<ReactForm />}></Route>
+        <Route path='react-life-cycle' element={<ReactLifeCycle />}></Route>
       </Route>
       <Route path='user' element={<UserTemplates />}>
         <Route index element={<Login />}></Route>
