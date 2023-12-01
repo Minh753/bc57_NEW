@@ -18,9 +18,18 @@ import Page404 from './Pages/Page404';
 import Admin from './Pages/Admin';
 import ReactForm from './Pages/ReactFrom/ReactForm';
 import ReactLifeCycle from './Pages/ReactLifeCycle/ReactLifeCycle';
+import {Provider} from 'react-redux';
+import { store } from './redux/store';
+import ChangeNumberRedux from './DemoRedux/ChangeNumberRedux';
+import ChangeCarColor from './DemoRedux/ChangeCarColor';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 //JSX
+// Cấu hình redux
+
+
+
 root.render(
+  <Provider store={store}>
   <BrowserRouter>
 
 
@@ -32,6 +41,9 @@ root.render(
         <Route path='xem-chi-tiet' element={<BaiTapXemChiTiet />}></Route>
         <Route path='react-form' element={<ReactForm />}></Route>
         <Route path='react-life-cycle' element={<ReactLifeCycle />}></Route>
+        <Route path='redux-change-number' element={<ChangeNumberRedux />}></Route>
+        <Route path='redux-change-car' element={<ChangeCarColor />}></Route>
+
       </Route>
       <Route path='user' element={<UserTemplates />}>
         <Route index element={<Login />}></Route>
@@ -46,7 +58,7 @@ root.render(
 
 
   </BrowserRouter>
-
+  </Provider>
 
 );
 

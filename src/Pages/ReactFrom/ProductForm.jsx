@@ -20,11 +20,65 @@ export default class ProductForm extends Component {
 
     }
 
-    handleChangeInput = (e) => {
+    // handleChangeInput = (e) => {
 
+    //     //Xử lý values
+    //     let tag = e.target; //Lấy ra dom hiện tại đang gõ
+    //     let dataType = e.target.getAttribute('data-type')
+    //     let newValues = { ...this.state.values }
+    //     newValues[tag.id] = tag.value;
+    //     //xử lý errors
+    //     let newErrors = { ...this.state.errors }
+    //     let messError = '';
+    //     if (newValues[tag.id] === '') {
+    //         messError = `${tag.id} cannot be blank !`
+    //     } else {
+    //         if (dataType) {
+    //             switch (dataType) {
+    //                 case 'number': {
+    //                     let regexNumber = /^[0-9]{1,7}$/
+    //                     if (!regexNumber.test(newValues[tag.id])) {
+    //                         messError = `${tag.id} is invalid!`
+    //                     }
+    //                 }; break
+    //                 // case 'abc':{
+
+    //                 // }
+    //                 default: { }
+    //             }
+    //         }
+
+    //     }
+
+    //     newErrors[tag.id] = messError
+
+    //     //Xử lý nút submit
+    //     //Lỗi xác định khi nào? các giá trị trong error chỉ cần 1 trường có lỗi => lỗi, hoặc tất cả value ''thì lỗi
+    //     let valid = true;
+    //     for (let key in newErrors) {
+    //         if (newErrors[key] !== '') {
+    //             valid = false;
+    //             break;
+    //         }
+    //     }
+    //     for (let key in newValues) {
+    //         if (newValues[key] === '') {
+    //             valid = false;
+    //             break;
+    //         }
+    //     }
+
+    //     this.setState({
+    //         values: newValues,
+    //         errors: newErrors,
+    //         isSubmit: valid,
+    //     })
+    // }
+    handleChangeInput = (e) => {
         //Xử lý values
         let tag = e.target; //Lấy ra dom hiện tại đang gõ
         let dataType = e.target.getAttribute('data-type')
+        // console.log(dataType)
         let newValues = { ...this.state.values }
         newValues[tag.id] = tag.value;
         //xử lý errors
@@ -41,19 +95,17 @@ export default class ProductForm extends Component {
                             messError = `${tag.id} is invalid!`
                         }
                     }; break
-                    // case 'abc':{
+                    // case 'email':{
 
                     // }
                     default: { }
                 }
             }
-
         }
 
         newErrors[tag.id] = messError
-
         //Xử lý nút submit
-        //Lỗi xác định khi nào? các giá trị trong error chỉ cần 1 trường có lỗi => lỗi, hoặc tất cả value ''thì lỗi
+        //Lỗi xác định khi nào? các giá trị trong error chỉ cần 1 trường có lỗi => lỗi, hoặc tất cả value '' thì lỗi
         let valid = true;
         for (let key in newErrors) {
             if (newErrors[key] !== '') {
@@ -67,11 +119,10 @@ export default class ProductForm extends Component {
                 break;
             }
         }
-
         this.setState({
             values: newValues,
             errors: newErrors,
-            isSubmit: valid,
+            isSubmit: valid
         })
     }
     handleSubmit = (e) => {
@@ -80,6 +131,29 @@ export default class ProductForm extends Component {
         let { addProduct } = this.props;
         //Truyền state.values ra cho hàm addProduct ở component React Form
         addProduct(this.state.values);
+    }
+    //Cách 1:Can thiệp gán props vào state trước render của component dựa vào: static getDerivedStateFromProps
+    // static getDerivedStateFromProps(newProps,currentState){
+    //     //Can thiệp vào quá trình trước khi render (bấm nút edit ở cha)=> lấy state product edit gán vào state.value
+    //     console.log(newProps)
+    //     console.log(currentState)
+
+    //     if(newProps.productEdit.id !== currentState.values.id){
+    //         //Hành động click nút chính
+    //         currentState.values = {...newProps.productEdit}
+    //     }
+        
+
+    //     //Trả ra state mới để hàm render lấy dữ liệu làm this.state
+    //     return currentState
+    // }
+
+    // Cách 2:dùng componentWillReceiveProps can thiệp props đưa vào state trước render
+    componentWillReceiveProps(newProps) {
+        //state thay đổi thì componentWillReceiveProps không chạy
+        this.setState({
+            values:newProps.productEdit
+        })
     }
 
     
@@ -139,6 +213,10 @@ export default class ProductForm extends Component {
                 </div>
                 <div className='card-footer'>
                     <button disabled={!this.state.isSubmit} type="submit" className="btn btn-primary">Submit</button>
+
+                    <button disabled={!this.state.isSubmit} type='button' className='btn btn-success mx-2' onClick={()=>{
+                        this.props.updateProduct(this.state.value)
+                    }}>Updade</button>
                 </div>
             </form>
         )

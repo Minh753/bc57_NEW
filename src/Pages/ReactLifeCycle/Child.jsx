@@ -8,6 +8,8 @@ export default class Child extends Component {
     constructor(props){
         super(props)
         this.state={
+            
+
 
 
         }
@@ -35,7 +37,10 @@ export default class Child extends Component {
     )
   }
   componentDidMount(){
-        console.log('componentDidMount child')
+        console.log('componentDidMount child');
+
+       
+
     }
     componentDidUpdate(){
         console.log('componentDidUpdate child')

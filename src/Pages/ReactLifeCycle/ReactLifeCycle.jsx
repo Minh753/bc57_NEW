@@ -11,6 +11,7 @@ export default class ReactLifeCycle extends Component {
             }
         }
         console.log('constructor')
+        this.timeout = {}
     }
     static getDerivedStateFromProps(newProps, currentState) {
         //Can thiệp trước khi html render tạo ra
@@ -47,9 +48,16 @@ export default class ReactLifeCycle extends Component {
   }
   componentDidMount(){
     //DÙng để can thiệp sau khi html render tạo ra
-    console.log('componentDidMount')
+    console.log('componentDidMount');
+    this.timeout = setInterval(()=>{
+        console.log('load data server')
+    },1000)
   }
   componentDidUpdate(){
     console.log('componentDidUpdate')
   }
+  componentWillUnmount(){
+    //lifecycle này sẽ thực thi trước khi component mất khỏi giao diện (mất khỏi dom)
+    clearInterval(this.timeout)
+}
 }

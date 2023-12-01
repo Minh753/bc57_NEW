@@ -29,6 +29,13 @@ export default class Header extends Component {
                                 <NavLink className="dropdown-item" to="/user">User </NavLink>
                             </div>
                         </li>
+                        <li className="nav-item dropdown">
+                            <NavLink className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Redux</NavLink>
+                            <div className="dropdown-menu" aria-labelledby="dropdownId">
+                                <NavLink className="dropdown-item" to="/redux-change-number">Change number</NavLink>
+                                <NavLink className="dropdown-item" to="/redux-change-car">Change car </NavLink>
+                            </div>
+                        </li>
                     </ul>
                     <form className="d-flex my-2 my-lg-0">
                         <input className="form-control me-sm-2" type="text" placeholder="Search" />

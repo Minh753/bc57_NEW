@@ -25,6 +25,19 @@ export default class ReactForm extends Component {
             arrProduct: this.state.arrProduct
         })
     }
+    updateProduct=(prodUpdate)=>{
+        let prod = this.state.arrProduct.find(pro=>pro.id === prodUpdate.id);
+
+        if(prod){
+            for(let key in prod){
+                prod[key]=prodUpdate[key]
+            }
+        }
+        this.setState({
+            arrProduct:this.state.arrProduct
+        })
+    }
+
     deleteProduct = (idProduct) => {
         this.state.arrProduct = this.state.arrProduct.filter(prod => prod.id !== idProduct)
         this.setState({
@@ -42,7 +55,7 @@ export default class ReactForm extends Component {
         return (
             <div className='container'>
                 <h3>Product management</h3>
-                <ProductForm productEdit={this.state.productEdit} addProduct={this.addProduct} />
+                <ProductForm updateProduct={this.updateProduct} productEdit={this.state.productEdit} addProduct={this.addProduct} />
                 <table className='table'>
                     <thead>
                         <tr>
