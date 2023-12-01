@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-
-export default class Header extends Component {
+import {connect} from 'react-redux'
+class Header extends Component {
     render() {
+        const {tongSoLuong,tongTien}=this.props;
         return (
             <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
                 <NavLink className="navbar-brand" to="/">ReactJS</NavLink>
@@ -34,15 +35,37 @@ export default class Header extends Component {
                             <div className="dropdown-menu" aria-labelledby="dropdownId">
                                 <NavLink className="dropdown-item" to="/redux-change-number">Change number</NavLink>
                                 <NavLink className="dropdown-item" to="/redux-change-car">Change car </NavLink>
+                                <NavLink className="dropdown-item" to="/redux-change-font-size">Change Font Size </NavLink>
                             </div>
                         </li>
                     </ul>
                     <form className="d-flex my-2 my-lg-0">
-                        <input className="form-control me-sm-2" type="text" placeholder="Search" />
-                        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <NavLink to="/redux-gio-hang" className={"nav-link mx-5 text-white"}>
+                                <i className='fa fa-3x fa-cart-plus'></i> ({tongSoLuong}-{tongTien.toLocaleString()})
+                            </NavLink>
                     </form>
                 </div>
             </nav>
         )
     }
 }
+
+const mapStateToProps = (state)=>{
+    let {gioHang} = state.gioHangState;
+    let tongSoLuong = 0;
+    let tongTien = 0;
+    for(let spGH of gioHang){
+        tongSoLuong += spGH.soLuong;
+        tongTien += spGH.soLuong * spGH.giaBan
+    }
+    //this.props = {tongSoLuong,tongTien}
+    return{
+        tongSoLuong,
+        tongTien
+    }
+}
+
+export default  connect(mapStateToProps)(Header)
+
+
+
